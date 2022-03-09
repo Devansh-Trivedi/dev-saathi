@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,16 +7,16 @@ import Regsiter from "./pages/auth/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileUpdate from "./pages/Profile/ProfileUpdate";
-import './App.css';
-import ProjectList from './components/screens/ProjectList';
+import NewProjectForm from "./components/NewProjectForm";
+import "./App.css";
+import ProjectList from "./components/screens/ProjectList";
 // import Home from './components/screens/Home'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ProjectDetails from './components/screens/ProjectDetails'
+import "bootstrap/dist/css/bootstrap.min.css";
+import ProjectDetails from "./components/screens/ProjectDetails";
 import Home from "./pages/Home/Home";
 
 export default function App() {
   return (
-    
     <div>
       <ToastContainer />
       <Routes>
@@ -52,6 +51,15 @@ export default function App() {
           element={
             <PrivateRoute>
               <ProjectDetails />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/ProjectForm"
+          element={
+            <PrivateRoute>
+              <NewProjectForm />
             </PrivateRoute>
           }
         />
