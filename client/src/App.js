@@ -9,14 +9,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileUpdate from "./pages/Profile/ProfileUpdate";
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import ProjectList from './components/screens/ProjectList';
-import Home from './components/screens/Home'
+// import ProjectList from './components/screens/ProjectList';
+// import Home from './components/screens/Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -42,7 +36,7 @@ export default function App() {
             </PrivateRoute>
           }
         />
-        <Route exact path="/home" element={<Login />} />
+        {/* <Route exact path="/home" element={<Login />} />
         <Route
           path="home"
           element={
@@ -59,7 +53,7 @@ export default function App() {
               <ProjectList />
             </PrivateRoute>
           }
-        />
+        /> */}
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Regsiter />} />
       </Routes>

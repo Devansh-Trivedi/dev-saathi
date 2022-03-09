@@ -10,7 +10,7 @@ require("dotenv").config();
 const app = express();
 
 mongoose
-  .connect(process.env.MONGO_URI_LOCAL, {
+  .connect(process.env.MONGO_URI_ONLINE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
