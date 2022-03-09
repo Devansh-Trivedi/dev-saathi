@@ -1,11 +1,7 @@
-const express = require("express");
-const router = express.Router();
-
 const Project = require("../models/projectData");
 
-router.post("/projectrequest", async (req, res) => {
+const makeNewProject = async (req, res) => {
   const { nameProj, requirements, repo, url, projDetails } = req.body;
-  console.log(nameProj, requirements, repo, url, projDetails);
 
   const project = Project({
     nameProj,
@@ -13,6 +9,7 @@ router.post("/projectrequest", async (req, res) => {
     repo,
     url,
     projectDetails: projDetails,
+    createdByUser: req.user._id
   });
 
   const success = await project.save();
@@ -20,12 +17,16 @@ router.post("/projectrequest", async (req, res) => {
   if (success) {
     return res.json({
       success: true,
+      message: "Project created successfully"
     });
   } else {
     return res.json({
       error: true,
+      message: "Something went wrong when creating a project"
     });
   }
-});
+}
 
-module.exports = router;
+module.exports = {
+  makeNewProject
+}

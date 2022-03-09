@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import "./NewProjectForm.css";
 import { formDataSubmit } from "../api/form";
+import { toast } from 'react-toastify'
+import { useNavigate } from "react-router-dom";
+
 const NewProjectForm = () => {
+  let navigate = useNavigate();
   const [details, setDetails] = useState({
     nameProj: "",
     requirements: "",
@@ -30,34 +34,14 @@ const NewProjectForm = () => {
       projDetails,
     }).then((res) => {
       if (res.data.success) {
-        alert("success");
+        toast.success(res.data.message)
+        navigate("/")
       } else {
-        alert("error");
+        toast.error(res.data.message)
       }
-    });
-    // const res = await fetch("/api/projectrequest", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     nameProj,
-    //     requirements,
-    //     repo,
-    //     url,
-    //     projDetails,
-    //   }),
-    // });
-
-    // const data = await res.json();
-
-    // if (res.status === 422 || !data) {
-    //   window.alert("invalid");
-    //   console.log("invalid");
-    // } else {
-    //   window.alert("success");
-    //   console.log("success");
-    // }
+    }).catch(err => {
+      toast.success('Something went wrong.')
+    })
   };
 
   return (
