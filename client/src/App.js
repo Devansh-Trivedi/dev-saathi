@@ -16,6 +16,7 @@ import ProjectDetails from "./components/screens/ProjectDetails";
 import Home from "./pages/Home/Home";
 import Learn from "./pages/Learn/Learn";
 
+import UserProfilePage from "./pages/Profile/UserProfilePage";
 
 export default function App() {
   return (
@@ -65,6 +66,16 @@ export default function App() {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/profile-page"
+          element={
+            <PrivateRoute>
+              <UserProfilePage />
+            </PrivateRoute>
+          }
+        />
+
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Regsiter />} />
         <Route exact path="/learn" element={<Learn />} />
@@ -72,7 +83,3 @@ export default function App() {
     </div>
   );
 }
-
-// function SHome() {
-//   return <h2>SHome</h2>;
-// }

@@ -8,3 +8,6 @@ export const uploadResumeApi = async (data) =>
 
 export const uploadImageApi = async (data) =>
     await axios.post('/upload-image', data)
+
+export const userProfile = async (userId) =>
+    await axios.get(`/user-profile?userId=${userId}`)
