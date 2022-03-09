@@ -1,7 +1,9 @@
 import React from "react";
 import "./home.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  let navigate = useNavigate();
   return (
     <>
       <div className="wrapper">
@@ -16,12 +18,16 @@ const Home = () => {
             </div>
             <ul className="list-items">
                <li><a href="#"><i className="fas fa-home"></i>Home</a></li>
-               <li><a href="#"><i className="fas fa-user"></i>Profile</a></li>
+               <li><a href="#" onClick={() => {navigate("/profile-update")}}><i className="fas fa-user"></i>Profile</a></li>
                <li><a href="#"><i className="fas fa-sliders-h"></i>Projects</a></li>
                <li><a href="#"><i className="fas fa-envelope"></i>Messages</a></li>
                <li><a href="#"><i className="fas fa-cog"></i>Settings</a></li>
                <li><a href="#"><i className="fas fa-book"></i>Learn</a></li>
                <li><a href="#"><i className="fas fa-phone"></i>Contact us</a></li>
+               <li><a href="#" onClick={() => {localStorage.removeItem("user") 
+                localStorage.removeItem("token")
+                navigate("/login")}}>
+                <i className="fas fa-sign-out-alt"></i>Log Out</a></li>
                <div className="icons">
                   <a href="#"><i className="fab fa-facebook-f"></i></a>
                   <a href="#"><i className="fab fa-twitter"></i></a>
