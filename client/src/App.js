@@ -9,10 +9,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileUpdate from "./pages/Profile/ProfileUpdate";
 import './App.css';
-// import ProjectList from './components/screens/ProjectList';
+import ProjectList from './components/screens/ProjectList';
 // import Home from './components/screens/Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import ProjectDetails from './components/screens/ProjectDetails'
 import Home from "./pages/Home/Home";
 
 export default function App() {
@@ -38,24 +38,23 @@ export default function App() {
             </PrivateRoute>
           }
         />
-        {/* <Route exact path="/home" element={<Login />} />
+
         <Route
-          path="home"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
-        <Route exact path="/projectList" element={<Login />} />
-        <Route
-          path="/projectList"
+          path="/ProjectList"
           element={
             <PrivateRoute>
               <ProjectList />
             </PrivateRoute>
           }
-        /> */}
+        />
+        <Route
+          path="/ProjectDetails"
+          element={
+            <PrivateRoute>
+              <ProjectDetails />
+            </PrivateRoute>
+          }
+        />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Regsiter />} />
       </Routes>
