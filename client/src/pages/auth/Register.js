@@ -30,7 +30,7 @@ export default function Regsiter(props) {
     const password = data.get('password')
     const userName = data.get('userName')
     const name = data.get('name')
-    if (email === "" || password === "" || phoneNumber === "" || name == "" || userName === "") {
+    if (email === "" || password === "" || phoneNumber === "" || name === "" || userName === "") {
       toast.error("Please enter all information")
     } else {
       const phone = phoneNumber.replace(" ", "").replace('-', "")

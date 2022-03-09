@@ -132,12 +132,6 @@ const NewProjectForm = () => {
               Submit
             </button>
           </fieldset>
-          <p class="copyright">
-            Designed by{" "}
-            <a href="https://colorlib.com" target="_blank" title="Colorlib">
-              Colorlib
-            </a>
-          </p>
         </form>
       </div>
     </>
