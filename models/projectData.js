@@ -13,11 +13,9 @@ const projectSchema = new mongoose.Schema(
     },
     repo: {
       type: String,
-      required: true,
     },
     url: {
       type: String,
-      required: true,
     },
     projectDetails: {
       type: String,

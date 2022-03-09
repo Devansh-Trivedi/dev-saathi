@@ -3,6 +3,7 @@ import "./NewProjectForm.css";
 import { formDataSubmit } from "../api/form";
 import { toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
+import { uploadImageApi } from "../api/user";
 
 const NewProjectForm = () => {
   let navigate = useNavigate();
@@ -13,27 +14,51 @@ const NewProjectForm = () => {
     url: "",
     projDetails: "",
   });
-  const [imgURL,setImgURL] = useState("")
+  const [image, setImage] = useState(null)
 
   let name, value;
   const handleForm = (e) => {
     name = e.target.name;
     value = e.target.value;
-
     setDetails({ ...details, [name]: value });
   };
 
   const submitForm = async (e) => {
     e.preventDefault();
+    const { nameProj, requirements, repo, url, projDetails } = details;
+    if (nameProj === "" || requirements === "" || projDetails === "") {
+      toast.error("Name, requriements and project details are required.")
+    } else if (image !== null) {
+      const formData = new FormData();
+      formData.append('projectImage', image);
+      uploadImageApi(formData)
+        .then((res) => {
+          if (!res.data.success) {
+            toast.error(res.data.message || "Something went wrong when uploading image.");
+          } else {
+            console.log(res.data.fileName)
+            addProject(res.data.fileName)
+          }
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+          toast.error(err.response.data ? err.response.data.message : "Something went wrong when uploading image");
+        });
+    } else {
+      addProject()
+    }
 
-    const { nameProj, requirements, repo, url, projDetails,imgURL } = details;
+  };
+
+  const addProject = async (fileName) => {
+    const { nameProj, requirements, repo, url, projDetails } = details;
     formDataSubmit({
       nameProj,
       requirements,
       repo,
       url,
       projDetails,
-      imgURL
+      imgURL: fileName
     }).then((res) => {
       if (res.data.success) {
         toast.success(res.data.message)
@@ -42,9 +67,9 @@ const NewProjectForm = () => {
         toast.error(res.data.message)
       }
     }).catch(err => {
-      toast.success('Something went wrong.')
+      toast.error('Something went wrong.')
     })
-  };
+  }
 
   return (
     <>
@@ -109,7 +134,7 @@ const NewProjectForm = () => {
           </fieldset>
           <fieldset>
             <span>Uplaod Image</span>
-            <input type="file" onChange={(e)=>setImgURL(e.target.files[0])} />
+            <input type="file" accept='.png' onChange={(e) => setImage(e.target.files[0])} />
           </fieldset>
           <fieldset>
             <button

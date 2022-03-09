@@ -2,7 +2,6 @@ const Project = require("../models/projectData");
 
 const makeNewProject = async (req, res) => {
   const { nameProj, requirements, repo, url, projDetails, imgURL } = req.body;
-  console.log(nameProj, requirements, repo, url, projDetails);
 
   const project = Project({
     nameProj,
@@ -29,6 +28,22 @@ const makeNewProject = async (req, res) => {
   }
 }
 
+const imageUpload = async (req, res) => {
+  if (req.file === null) {
+    return res.json({
+      error: true,
+      message: "Image upload failed"
+    })
+  } else {
+    return res.json({
+      success: true,
+      message: "Image uploaded successfully",
+      fileName: req.file.filename
+    })
+  }
+};
+
 module.exports = {
-  makeNewProject
+  makeNewProject,
+  imageUpload
 }
