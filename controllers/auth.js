@@ -118,10 +118,12 @@ const loginUser = async (req, res) => {
 };
 
 const currentUser = async (req, res) => {
+  const user = req.user
+  user.password = undefined
   return res.send({
     success: true,
     message: "User data.",
-    data: req.user,
+    data: user,
   });
 };
 

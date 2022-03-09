@@ -12,10 +12,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import { updateProfile } from '../../api/user';
+import { updateProfile, uploadResumeApi } from '../../api/user';
 import ReactQuill from 'react-quill';
-import InputLabel from '@mui/material/InputLabel';
 import 'react-quill/dist/quill.snow.css';
+import config from '../../config';
 
 const theme = createTheme();
 
@@ -25,41 +25,69 @@ export default function ProfileUpdate() {
   let navigate = useNavigate();
 
   const [userUpdate, setUserUpdate] = React.useState({ ...user, techStackUpdate: user.techStack.join(',') })
+  const [selectedFile, setSelectedFile] = React.useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { linkedin, stackOverflow, githubID, name, location, techStackUpdate, previousProjects } = userUpdate
+    const { name } = userUpdate
     if (name === "") {
       toast.error("Name is required")
     } else {
-      let tech = []
-      console.log(techStackUpdate)
-      if (techStackUpdate !== '') {
-        tech = techStackUpdate.split(',')
+      if (selectedFile !== null) {
+        uploadResume()
+      } else {
+        submit()
       }
-      updateProfile({ linkedin, stackOverflow, githubID, name, location, techStack: tech, previousProjects })
-        .then((res) => {
-          if (res.data.success) {
-            toast.success("Successfully updated Profile.");
-            user.linkedin = linkedin
-            user.stackOverflow = stackOverflow
-            user.githubID = githubID
-            user.name = name
-            user.location = location
-            user.techStack = tech
-            user.previousProjects = previousProjects
-            localStorage.setItem("user", JSON.stringify(user))
-            navigate("/");
-          } else {
-            toast.error(res.data.message || "Something went wrong");
-          }
-        })
-        .catch((err) => {
-          console.log(err.response.data.message);
-          toast.error(err.response.data ? err.response.data.message : "Something went wrong");
-        });
     }
   };
+
+  const uploadResume = () => {
+    const formData = new FormData();
+    formData.append('resume', selectedFile);
+    uploadResumeApi(formData)
+      .then((res) => {
+        if (!res.data.success) {
+          toast.error(res.data.message || "Something went wrong when updating resume");
+        } else {
+          submit(res.data.fileName)
+        }
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+        toast.error(err.response.data ? err.response.data.message : "Something went wrong when updating resume");
+      });
+  };
+
+  const submit = (resumeFileName) => {
+    const { linkedin, stackOverflow, githubID, name, location, techStackUpdate, previousProjects } = userUpdate
+    let tech = []
+    console.log(techStackUpdate)
+    if (techStackUpdate !== '') {
+      tech = techStackUpdate.split(',')
+    }
+    updateProfile({ linkedin, stackOverflow, githubID, name, location, techStack: tech, previousProjects })
+      .then((res) => {
+        if (res.data.success) {
+          toast.success("Successfully updated Profile.");
+          user.linkedin = linkedin
+          user.stackOverflow = stackOverflow
+          user.githubID = githubID
+          user.name = name
+          user.location = location
+          user.techStack = tech
+          user.previousProjects = previousProjects
+          user.resume = resumeFileName
+          localStorage.setItem("user", JSON.stringify(user))
+          navigate("/");
+        } else {
+          toast.error(res.data.message || "Something went wrong");
+        }
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+        toast.error(err.response.data ? err.response.data.message : "Something went wrong");
+      });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -168,6 +196,27 @@ export default function ProfileUpdate() {
                   onChange={(e) => {
                     setUserUpdate({ ...userUpdate, previousProjects: e })
                   }} />
+              </Grid>
+              <Grid item xs={12}>
+                <label htmlFor="resume-upload" style={{ marginTop: "10px" }}>
+                  Resume: &nbsp; &nbsp; &nbsp; &nbsp;
+                  <input
+                    id="resume-upload"
+                    name="resume-upload"
+                    type="file"
+                    accept='.pdf'
+                    onChange={(e) => {
+                      setSelectedFile(e.target.files[0])
+                    }}
+                  />
+                </label>
+                {user.resume !== "" && (
+                  <label htmlFor="resume-upload" style={{ marginTop: "5px" }}>
+                    <Link href={`${config.SERVER_API_URL}/download-resume/${user._id}`} variant="body2">
+                      {"Previously uploaded"}
+                    </Link>
+                  </label>
+                )}
               </Grid>
             </Grid>
             <Button

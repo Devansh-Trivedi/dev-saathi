@@ -43,6 +43,9 @@ const userSchema = new mongoose.Schema(
     stackOverflow: {
       type: String,
     },
+    resume: {
+      type: String,
+    },
     previousProjects: { type: String, default: '' },
     joinedOn: { type: Date, default: Date.now },
   },
