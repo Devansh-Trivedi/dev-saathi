@@ -9,6 +9,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileUpdate from "./pages/Profile/ProfileUpdate";
 import Home from "./pages/Home/Home";
+import Learn from "./pages/Learn/Learn";
+
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
         />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Regsiter />} />
+        <Route exact path="/learn" element={<Learn />} />
       </Routes>
     </div>
   );

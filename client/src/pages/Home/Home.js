@@ -22,7 +22,7 @@ const Home = () => {
                <li><a href="#"><i className="fas fa-sliders-h"></i>Projects</a></li>
                <li><a href="#"><i className="fas fa-envelope"></i>Messages</a></li>
                <li><a href="#"><i className="fas fa-cog"></i>Settings</a></li>
-               <li><a href="#"><i className="fas fa-book"></i>Learn</a></li>
+               <li><a href="#" onClick={() => {navigate("/learn")}}><i className="fas fa-book"></i>Learn</a></li>
                <li><a href="#"><i className="fas fa-phone"></i>Contact us</a></li>
                <li><a href="#" onClick={() => {localStorage.removeItem("user") 
                 localStorage.removeItem("token")
