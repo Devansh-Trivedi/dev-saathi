@@ -8,10 +8,16 @@ import Regsiter from "./pages/auth/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileUpdate from "./pages/Profile/ProfileUpdate";
+import './App.css';
+import ProjectList from './components/screens/ProjectList';
+// import Home from './components/screens/Home'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ProjectDetails from './components/screens/ProjectDetails'
 import Home from "./pages/Home/Home";
 
-function App() {
+export default function App() {
   return (
+    
     <div>
       <ToastContainer />
       <Routes>
@@ -32,6 +38,23 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/ProjectList"
+          element={
+            <PrivateRoute>
+              <ProjectList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/ProjectDetails"
+          element={
+            <PrivateRoute>
+              <ProjectDetails />
+            </PrivateRoute>
+          }
+        />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Regsiter />} />
       </Routes>
@@ -39,4 +62,6 @@ function App() {
   );
 }
 
-export default App;
+// function SHome() {
+//   return <h2>SHome</h2>;
+// }

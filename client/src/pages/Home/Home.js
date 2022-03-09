@@ -1,11 +1,22 @@
 import React from "react";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
+import { Navbar, Nav, Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 const Home = () => {
   let navigate = useNavigate();
   return (
     <>
+    <Navbar bg="light" variant="light">
+                <Container>
+                <Navbar.Brand href="#home">Dev Saathi</Navbar.Brand>
+                <Nav className="me-auto">
+                <Nav.Link href="#home">Home</Nav.Link>
+                <Nav.Link href="#features">Features</Nav.Link>
+                <Nav.Link href="#pricing">Pricing</Nav.Link>
+                </Nav>
+                </Container>
+      </Navbar>
       <div className="wrapper">
          <input type="checkbox" id="btn" hidden />
          <label for="btn" className="menu-btn">
@@ -54,7 +65,7 @@ const Home = () => {
         </div> <br />
         <p>OR</p> <br />
         <div className="btn">
-            <a href="#"><span>I want to Collaborate</span></a>
+            <a href="ProjectList"><span>I want to Collaborate</span></a>
         </div>
       </div>
       
