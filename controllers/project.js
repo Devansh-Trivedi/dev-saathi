@@ -43,7 +43,22 @@ const imageUpload = async (req, res) => {
   }
 };
 
+const listProject = async(req,res)=>{
+  try{
+    const projects = await Project.find({}).exec()
+    return res.json({
+      success:true,
+      projects
+    })
+  }catch(err){
+return res.json({
+  error:true,
+})
+  }
+}
+
 module.exports = {
   makeNewProject,
-  imageUpload
+  imageUpload,
+  listProject
 }

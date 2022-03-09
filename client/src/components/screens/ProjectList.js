@@ -1,9 +1,26 @@
-import React from 'react';
+import React,{useState,useEffect,useContext} from 'react'
 import {BrowserRouter,Route,Switch,useHistory, useNavigate} from 'react-router-dom'
 import { Navbar, Nav, Container, Row, Col, Card, Button } from 'react-bootstrap';
 import Preview from  "./preview.jpg";
+import { listProjectApi } from '../../api/user';
+import { toast } from 'react-toastify';
 function ProjectList(){
+    const [data,setData] = useState([])
     let navigate = useNavigate();
+
+    useEffect(()=>{
+        listProjectApi().then(res=>{
+            if(res.data.success){
+toast.success("Projects Fetched")
+setData(res.data.projects)
+            }else{
+toast.error("Something went wrong when fecthing projects")
+            }
+        }).catch(err=>{
+            toast.error("Something went wrong when fecthing projects")
+
+        })
+    },[])
 
     return(
 
@@ -21,7 +38,7 @@ function ProjectList(){
 
             <div className="wrapper" style={{zIndex:"1"}}>
                 <input type="checkbox" id="btn" hidden />
-                <label for="btn" className="menu-btn">
+                <label htmlFor="btn" className="menu-btn">
                 <i className="fas fa-bars"></i>
                 <i className="fas fa-times"></i>
                 </label>
@@ -51,79 +68,34 @@ function ProjectList(){
                 </nav>
             </div>
 
-
-            <Container style={{marginTop:"100px"}}>
-                <Col>
-                    <Row style={{marginTop:"30px", marginBottom:"30px"}}> 
-                        <Card border="secondary" style={{ width: '80rem' }}>
-                            <Card.Img variant="top" src={Preview} style={{width:"580px", marginLeft:"auto",marginRight:"auto"}} />
-                            <Card.Header>Project name</Card.Header>
-                            <Card.Body>
-                            <Card.Title>Description:</Card.Title>
-                            <Card.Text>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
-                            </Card.Text>
-                            <Card.Title>Tags:</Card.Title>
-                            <Card.Text>
-                                Reactjs, Nodejs, MongoDB
-                            </Card.Text>
-                            <Button variant="primary" href="/ProjectDetails"  target="_blank">View Details</Button>
-                            </Card.Body>
-                        </Card>
-                    </Row>
-                    <Row style={{marginTop:"30px", marginBottom:"30px"}}> 
-                        <Card border="secondary" style={{ width: '80rem' }}>
-                            <Card.Img variant="top" src={Preview} style={{width:"580px", marginLeft:"auto",marginRight:"auto"}} />
-                            <Card.Header>Project name</Card.Header>
-                            <Card.Body>
-                            <Card.Title>Description:</Card.Title>
-                            <Card.Text>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
-                            </Card.Text>
-                            <Card.Title>Tags:</Card.Title>
-                            <Card.Text>
-                                Reactjs, Nodejs, MongoDB
-                            </Card.Text>
-                            <Button variant="primary"  href="/ProjectDetails"  target="_blank">View Details</Button>
-                            </Card.Body>
-                        </Card>
-                    </Row>
-                    <Row style={{marginTop:"30px", marginBottom:"30px"}}> 
-                        <Card border="secondary" style={{ width: '80rem' }}>
-                            <Card.Img variant="top" src={Preview} style={{width:"580px", marginLeft:"auto",marginRight:"auto"}} />
-                            <Card.Header>Project name</Card.Header>
-                            <Card.Body>
-                            <Card.Title>Description:</Card.Title>
-                            <Card.Text>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
-                            </Card.Text>
-                            <Card.Title>Tags:</Card.Title>
-                            <Card.Text>
-                                Reactjs, Nodejs, MongoDB
-                            </Card.Text>
-                            <Button variant="primary" href="/ProjectDetails"  target="_blank">View Details</Button>
-                            </Card.Body>
-                        </Card>
-                    </Row>
-                    <Row style={{marginTop:"30px", marginBottom:"30px"}}> 
-                        <Card border="secondary" style={{ width: '80rem' }}>
-                            <Card.Img variant="top" src={Preview} style={{width:"580px", marginLeft:"auto",marginRight:"auto"}} />
-                            <Card.Header>Project name</Card.Header>
-                            <Card.Body>
-                            <Card.Title>Description:</Card.Title>
-                            <Card.Text>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
-                            </Card.Text>
-                            <Card.Title>Tags:</Card.Title>
-                            <Card.Text>
-                                Reactjs, Nodejs, MongoDB
-                            </Card.Text>
-                            <Button variant="primary" href="/ProjectDetails"  target="_blank">View Details</Button>
-                            </Card.Body>
-                        </Card>
-                    </Row>
-                </Col>
-            </Container>
+            {
+                data.map(item=>{
+                    return(
+                        <Container style={{marginTop:"100px"}}>
+                            <Col key={item._id}>
+                                <Row style={{marginTop:"30px", marginBottom:"30px"}}> 
+                                    <Card border="secondary" style={{ width: '80rem' }}>
+                                        <Card.Img variant="top" src={Preview} style={{width:"580px", marginLeft:"auto",marginRight:"auto"}} />
+                                        <Card.Header>{item.nameProj}</Card.Header>
+                                        <Card.Body>
+                                        <Card.Title>Description:</Card.Title>
+                                        <Card.Text>
+                                            {item.projectDetails}
+                                        </Card.Text>
+                                        <Card.Title>Tags:</Card.Title>
+                                        <Card.Text>
+                                            {item.requirements}
+                                        </Card.Text>
+                                        <Button variant="primary" href="/ProjectDetails"  target="_blank">View Details</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </Row>
+                            </Col>
+                        </Container>
+                    )
+                })
+            }
+            
         </div>
         
 

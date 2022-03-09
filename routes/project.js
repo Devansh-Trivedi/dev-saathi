@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const {
   makeNewProject,
-  imageUpload
+  imageUpload,
+  listProject
 } = require("../controllers/project")
 const authCheck = require("../middlewares/authCheck");
 
@@ -22,5 +23,7 @@ const uploadStorage = multer({ storage: storage })
 router.post("/projectrequest", authCheck, makeNewProject);
 
 router.post("/upload-image", authCheck, uploadStorage.single("projectImage"), imageUpload);
+
+router.get('/project-list',listProject)
 
 module.exports = router;
