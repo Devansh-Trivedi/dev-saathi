@@ -128,26 +128,21 @@ const currentUser = async (req, res) => {
 
 const updateUserProfile = async (req, res) => {
   try {
-    const { phoneNumber, name, location, techStack, githubID, linkedin, stackOverflow } = req.body;
-    if (!name || !phoneNumber || name === "" || phoneNumber === "") {
+    const { name, location, techStack, githubID, linkedin, stackOverflow, previousProjects } = req.body;
+    if (!name || name === "") {
       return res.status(400).json({
         error: true,
-        message: "Phone Number and name are required",
-      });
-    } else if (!validatePhoneNumber(phoneNumber)) {
-      return res.status(400).json({
-        error: true,
-        message: "Phone Number is invalid",
+        message: "Name is required",
       });
     } else {
       let updateStatement = {
         name,
-        phoneNumber,
         location,
         techStack,
         githubID,
         linkedin,
-        stackOverflow
+        stackOverflow,
+        previousProjects
       };
       User.findOneAndUpdate(
         { email: req.user.email },
