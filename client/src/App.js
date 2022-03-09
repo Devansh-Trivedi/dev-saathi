@@ -13,6 +13,7 @@ import './App.css';
 // import Home from './components/screens/Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Home from "./pages/Home/Home";
 
 export default function App() {
   return (
@@ -24,7 +25,8 @@ export default function App() {
           path="/"
           element={
             <PrivateRoute>
-              <Dashboard />
+              {/* <Dashboard /> */}
+              <Home />
             </PrivateRoute>
           }
         />
