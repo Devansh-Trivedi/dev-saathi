@@ -48,7 +48,25 @@ const getResume = async (req, res) => {
   }
 }
 
+const getUserProfile = async (req, res) => {
+  if (req.query.userId === null || req.query.userId === undefined) {
+    return res.json({
+      error: true,
+      message: "User Id required"
+    })
+  } else {
+    const user = await User.findById(req.query.userId)
+    user.password = undefined
+    return res.json({
+      success: true,
+      userData: user,
+      message: "Profile found."
+    })
+  }
+}
+
 module.exports = {
   resumeUpload,
-  getResume
+  getResume,
+  getUserProfile
 };

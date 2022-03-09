@@ -25,6 +25,8 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(bodyParser.json({ limit: "2mb" }));
 
+app.use(express.static('user-project-image'))
+
 fs.readdirSync("./routes/").map((routeFile) => {
   app.use("/api", require("./routes/" + routeFile));
 });
