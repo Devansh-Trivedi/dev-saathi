@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./NewProjectForm.css";
-
+import { formDataSubmit } from "../api/form";
 const NewProjectForm = () => {
   const [details, setDetails] = useState({
     nameProj: "",
     requirements: "",
     repo: "",
     url: "",
-    projdetails: "",
+    projDetails: "",
   });
 
   let name, value;
@@ -18,8 +18,46 @@ const NewProjectForm = () => {
     setDetails({ ...details, [name]: value });
   };
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
+
+    const { nameProj, requirements, repo, url, projDetails } = details;
+    formDataSubmit({
+      nameProj,
+      requirements,
+      repo,
+      url,
+      projDetails,
+    }).then((res) => {
+      if (res.data.success) {
+        alert("success");
+      } else {
+        alert("error");
+      }
+    });
+    // const res = await fetch("/api/projectrequest", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     nameProj,
+    //     requirements,
+    //     repo,
+    //     url,
+    //     projDetails,
+    //   }),
+    // });
+
+    // const data = await res.json();
+
+    // if (res.status === 422 || !data) {
+    //   window.alert("invalid");
+    //   console.log("invalid");
+    // } else {
+    //   window.alert("success");
+    //   console.log("success");
+    // }
   };
 
   return (
@@ -77,9 +115,9 @@ const NewProjectForm = () => {
             <textarea
               placeholder="Details about the Project"
               tabindex="5"
-              value={details.projdetails}
+              value={details.projDetails}
               onChange={handleForm}
-              name="projdetails"
+              name="projDetails"
               required
             ></textarea>
           </fieldset>
