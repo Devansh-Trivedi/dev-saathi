@@ -1,3 +1,4 @@
+
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,6 +8,7 @@ import Regsiter from "./pages/auth/Register";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProfileUpdate from "./pages/Profile/ProfileUpdate";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <Dashboard />
+              {/* <Dashboard /> */}
+              <Home />
             </PrivateRoute>
           }
         />
