@@ -133,7 +133,6 @@ const NewProjectForm = () => {
             ></textarea>
           </fieldset>
           <fieldset>
-            <span>Uplaod Image</span>
             <input type="file" accept='.png' onChange={(e) => setImage(e.target.files[0])} />
           </fieldset>
           <fieldset>
