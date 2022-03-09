@@ -27,12 +27,17 @@ const projectSchema = new mongoose.Schema(
       type: ObjectId,
       ref: 'User',
       required: true,
+    },
+    imgURL: {
+      type: String,
+      required: true,
     }
   },
   {
     timestamps: true,
   }
 );
+
 
 const Project = mongoose.model("PROJECT", projectSchema);
 

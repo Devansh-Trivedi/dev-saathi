@@ -13,6 +13,7 @@ const NewProjectForm = () => {
     url: "",
     projDetails: "",
   });
+  const [imgURL,setImgURL] = useState("")
 
   let name, value;
   const handleForm = (e) => {
@@ -25,13 +26,14 @@ const NewProjectForm = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const { nameProj, requirements, repo, url, projDetails } = details;
+    const { nameProj, requirements, repo, url, projDetails,imgURL } = details;
     formDataSubmit({
       nameProj,
       requirements,
       repo,
       url,
       projDetails,
+      imgURL
     }).then((res) => {
       if (res.data.success) {
         toast.success(res.data.message)
@@ -104,6 +106,10 @@ const NewProjectForm = () => {
               name="projDetails"
               required
             ></textarea>
+          </fieldset>
+          <fieldset>
+            <span>Uplaod Image</span>
+            <input type="file" onChange={(e)=>setImgURL(e.target.files[0])} />
           </fieldset>
           <fieldset>
             <button

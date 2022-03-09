@@ -1,7 +1,8 @@
 const Project = require("../models/projectData");
 
 const makeNewProject = async (req, res) => {
-  const { nameProj, requirements, repo, url, projDetails } = req.body;
+  const { nameProj, requirements, repo, url, projDetails, imgURL } = req.body;
+  console.log(nameProj, requirements, repo, url, projDetails);
 
   const project = Project({
     nameProj,
@@ -9,7 +10,8 @@ const makeNewProject = async (req, res) => {
     repo,
     url,
     projectDetails: projDetails,
-    createdByUser: req.user._id
+    createdByUser: req.user._id,
+    imgURL
   });
 
   const success = await project.save();
