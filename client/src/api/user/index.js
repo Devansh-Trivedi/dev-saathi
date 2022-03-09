@@ -11,3 +11,5 @@ export const uploadImageApi = async (data) =>
 
 export const listProjectApi = async () =>
     await axios.get('/project-list')
+export const userProfile = async (userId) =>
+    await axios.get(`/user-profile?userId=${userId}`)

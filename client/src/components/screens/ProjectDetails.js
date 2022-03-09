@@ -19,7 +19,7 @@ function ProjectList(){
                 </Container>
             </Navbar>
 
-            <div className="wrapper">
+            <div className="wrapper" style={{zIndex:"1"}}>
                 <input type="checkbox" id="btn" hidden />
                 <label for="btn" className="menu-btn">
                 <i className="fas fa-bars"></i>

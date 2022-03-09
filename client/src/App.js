@@ -14,6 +14,7 @@ import ProjectList from "./components/screens/ProjectList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProjectDetails from "./components/screens/ProjectDetails";
 import Home from "./pages/Home/Home";
+import UserProfilePage from "./pages/Profile/UserProfilePage";
 
 export default function App() {
   return (
@@ -63,13 +64,19 @@ export default function App() {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/profile-page"
+          element={
+            <PrivateRoute>
+              <UserProfilePage />
+            </PrivateRoute>
+          }
+        />
+
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Regsiter />} />
       </Routes>
     </div>
   );
 }
-
-// function SHome() {
-//   return <h2>SHome</h2>;
-// }
