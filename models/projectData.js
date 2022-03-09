@@ -21,6 +21,10 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  imgURL: {
+    type: String,
+    required: true,
+  }
 });
 
 const Project = mongoose.model("PROJECT", projectSchema);
