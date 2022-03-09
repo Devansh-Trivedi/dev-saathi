@@ -5,3 +5,6 @@ export const updateProfile = async (data) =>
 
 export const uploadResumeApi = async (data) =>
     await axios.post('/update-resume', data)
+
+export const uploadImageApi = async (data) =>
+    await axios.post('/upload-image', data)
