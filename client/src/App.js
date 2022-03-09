@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/auth/Login";
+import Regsiter from "./pages/auth/Register";
+import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import ProfileUpdate from "./pages/Profile/ProfileUpdate";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ToastContainer />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile-update"
+          element={
+            <PrivateRoute>
+              <ProfileUpdate />
+            </PrivateRoute>
+          }
+        />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Regsiter />} />
+      </Routes>
     </div>
   );
 }
