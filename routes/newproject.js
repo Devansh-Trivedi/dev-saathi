@@ -4,7 +4,7 @@ const router = express.Router();
 const Project = require("../models/projectData");
 
 router.post("/projectrequest", async (req, res) => {
-  const { nameProj, requirements, repo, url, projDetails, imgURL } = req.body;
+  const { nameProj, requirements, repo, url, projDetails } = req.body;
   console.log(nameProj, requirements, repo, url, projDetails);
 
   const project = Project({
@@ -13,7 +13,6 @@ router.post("/projectrequest", async (req, res) => {
     repo,
     url,
     projectDetails: projDetails,
-    imgURL
   });
 
   const success = await project.save();

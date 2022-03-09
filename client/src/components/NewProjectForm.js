@@ -9,7 +9,6 @@ const NewProjectForm = () => {
     url: "",
     projDetails: "",
   });
-  const [imgURL,setImgURL] = useState("")
 
   let name, value;
   const handleForm = (e) => {
@@ -22,14 +21,13 @@ const NewProjectForm = () => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const { nameProj, requirements, repo, url, projDetails,imgURL } = details;
+    const { nameProj, requirements, repo, url, projDetails} = details;
     formDataSubmit({
       nameProj,
       requirements,
       repo,
       url,
       projDetails,
-      imgURL
     }).then((res) => {
       if (res.data.success) {
         alert("success");
@@ -123,10 +121,10 @@ const NewProjectForm = () => {
               required
             ></textarea>
           </fieldset>
-          <fieldset>
+          {/* <fieldset>
             <span>Uplaod Image</span>
             <input type="file" onChange={(e)=>setImgURL(e.target.files[0])} />
-          </fieldset>
+          </fieldset> */}
           <fieldset>
             <button
               name="submit"
