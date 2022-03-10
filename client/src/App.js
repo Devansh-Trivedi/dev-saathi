@@ -14,6 +14,8 @@ import ProjectList from "./components/screens/ProjectList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProjectDetails from "./components/screens/ProjectDetails";
 import Home from "./pages/Home/Home";
+import Learn from "./pages/Learn/Learn";
+
 import UserProfilePage from "./pages/Profile/UserProfilePage";
 import UserGithubProfile from "./components/screens/UserGithubProfile"
 
@@ -85,6 +87,7 @@ export default function App() {
 
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Regsiter />} />
+        <Route exact path="/learn" element={<Learn />} />
       </Routes>
     </div>
   );

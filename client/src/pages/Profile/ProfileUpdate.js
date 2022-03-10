@@ -120,6 +120,7 @@ export default function ProfileUpdate() {
                     {/* <li><a href="#"><i className="fas fa-cog"></i>Settings</a></li> */}
                     <li><a href="#"><i className="fas fa-book"></i>Learn</a></li>
                     {/* <li><a href="#"><i className="fas fa-phone"></i>Contact us</a></li> */}
+                    <li><a href="#" onClick={() => {navigate("/UserGithubProfile")}}><i className="fab fa-github"></i>GitHub</a></li>
                     <li><a href="#" onClick={() => {localStorage.removeItem("user") 
                         localStorage.removeItem("token")
                         navigate("/login")}}>

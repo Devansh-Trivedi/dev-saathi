@@ -15,7 +15,7 @@ const Home = () => {
   let navigate = useNavigate();
   return (
     <>
-      <Navbar bg="light" variant="light">
+      {/* <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="/" style={{}} >Dev Saathi</Navbar.Brand>
           {/* <Nav className="me-auto">
@@ -23,8 +23,8 @@ const Home = () => {
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav> */}
-        </Container>
-      </Navbar>
+        {/* </Container>
+      </Navbar> */}
       <div className="wrapper" style={{zIndex:"1"}}>
                 <input type="checkbox" id="btn" hidden />
                 <label htmlFor="btn" className="menu-btn">
@@ -41,12 +41,14 @@ const Home = () => {
                     <li><a href="/ProjectList"><i className="fas fa-sliders-h"></i>Projects</a></li>
                     {/* <li><a href="#"><i className="fas fa-envelope"></i>Messages</a></li> */}
                     {/* <li><a href="#"><i className="fas fa-cog"></i>Settings</a></li> */}
-                    <li><a href="#"><i className="fas fa-book"></i>Learn</a></li>
+                    <li><a href="#" onClick={() => {navigate("/learn")}}><i className="fas fa-book"></i>Learn</a></li>
                     {/* <li><a href="#"><i className="fas fa-phone"></i>Contact us</a></li> */}
+                    <li><a href="#" onClick={() => {navigate("/UserGithubProfile")}}><i className="fab fa-github"></i>GitHub</a></li>
                     <li><a href="#" onClick={() => {localStorage.removeItem("user") 
                         localStorage.removeItem("token")
                         navigate("/login")}}>
                         <i className="fas fa-sign-out-alt"></i>Log Out</a></li>
+                    
                     <div className="icons">
                         <a href="#"><i className="fab fa-facebook-f"></i></a>
                         <a href="#"><i className="fab fa-twitter"></i></a>
@@ -62,7 +64,7 @@ const Home = () => {
           <Col> 
           <div>
           <h1 style={{ margin: "auto", width: "20%", marginTop:"100px" }}>Dev-Saathi</h1>
-          </div>{" "}
+          </div>
           <br />
           </Col>
         </Row>

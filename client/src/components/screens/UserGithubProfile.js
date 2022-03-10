@@ -15,7 +15,7 @@ function UserProfilePage(){
     const [repoUrl, setRepoUrl] = useState('');
 
     useEffect(()=>{
-        fetch("https://api.github.com/users/Devansh-Trivedi")
+        fetch("https://api.github.com/users/altamash-k")
         .then(res=>res.json())
         .then(data=>{
             setData(data);

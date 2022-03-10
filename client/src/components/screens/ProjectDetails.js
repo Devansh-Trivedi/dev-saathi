@@ -38,16 +38,16 @@ function ProjectList(){
     return(
 
         <div>
-            <Navbar bg="light" variant="light">
+            {/* <Navbar bg="light" variant="light">
                 <Container>
                 <Navbar.Brand href="/">Dev Saathi</Navbar.Brand>
                 <Nav className="me-auto">
                 {/* <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="#features">Features</Nav.Link>
                 <Nav.Link href="#pricing">Pricing</Nav.Link> */}
-                </Nav>
-                </Container>
-            </Navbar>
+                {/* </Nav> */}
+                {/* </Container>
+            </Navbar> */} 
 
             <div className="wrapper" style={{zIndex:"1"}}>
                 <input type="checkbox" id="btn" hidden />
@@ -60,13 +60,14 @@ function ProjectList(){
                     Menu
                     </div>
                     <ul className="list-items">
-                    <li><a href="#"><i className="fas fa-home"></i>Home</a></li>
+                    <li><a href="#" onClick={() => {navigate("/")}}><i className="fas fa-home"></i>Home</a></li>
                     <li><a href="#" onClick={() => {navigate("/profile-update")}}><i className="fas fa-user"></i>Profile</a></li>
                     <li><a href="#"><i className="fas fa-sliders-h"></i>Projects</a></li>
                     {/* <li><a href="#"><i className="fas fa-envelope"></i>Messages</a></li> */}
                     {/* <li><a href="#"><i className="fas fa-cog"></i>Settings</a></li> */}
                     <li><a href="#"><i className="fas fa-book"></i>Learn</a></li>
                     {/* <li><a href="#"><i className="fas fa-phone"></i>Contact us</a></li> */}
+                    <li><a href="#" onClick={() => {navigate("/UserGithubProfile")}}><i className="fab fa-github"></i>GitHub</a></li>
                     <li><a href="#" onClick={() => {localStorage.removeItem("user") 
                         localStorage.removeItem("token")
                         navigate("/login")}}>
