@@ -17,6 +17,7 @@ import Home from "./pages/Home/Home";
 import Learn from "./pages/Learn/Learn";
 
 import UserProfilePage from "./pages/Profile/UserProfilePage";
+import UserGithubProfile from "./components/screens/UserGithubProfile"
 
 export default function App() {
   return (
@@ -54,6 +55,14 @@ export default function App() {
           element={
             <PrivateRoute>
               <ProjectDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/UserGithubProfile"
+          element={
+            <PrivateRoute>
+              <UserGithubProfile />
             </PrivateRoute>
           }
         />
