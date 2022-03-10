@@ -30,7 +30,7 @@ function ProjectList(){
                     Menu
                     </div>
                     <ul className="list-items">
-                    <li><a href="#"><i className="fas fa-home"></i>Home</a></li>
+                    <li><a href="#" onClick={() => {navigate("/")}}><i className="fas fa-home"></i>Home</a></li>
                     <li><a href="#" onClick={() => {navigate("/profile-update")}}><i className="fas fa-user"></i>Profile</a></li>
                     <li><a href="#"><i className="fas fa-sliders-h"></i>Projects</a></li>
                     <li><a href="#"><i className="fas fa-envelope"></i>Messages</a></li>

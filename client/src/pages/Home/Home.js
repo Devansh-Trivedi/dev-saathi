@@ -35,7 +35,10 @@ const Home = () => {
           <div className="title">Menu</div>
           <ul className="list-items">
             <li>
-              <a href="#">
+              <a href="#"
+              onClick={() => {
+                  navigate("/");
+                }}>
                 <i className="fas fa-home"></i>Home
               </a>
             </li>
@@ -136,7 +139,7 @@ const Home = () => {
             <span>I want a Collaborator</span>
           </a>
         </div>{" "}
-        <br />
+        <br /> <br />
         <p>OR</p> <br />
         <div className="btn">
           <a href="ProjectList">
