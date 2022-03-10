@@ -16,13 +16,14 @@ import { updateProfile, uploadResumeApi } from '../../api/user';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import config from '../../config';
+import {Navbar} from "react-bootstrap"
 
 const theme = createTheme();
 
 export default function ProfileUpdate() {
+  let navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"))
-  let navigate = useNavigate();
 
   const [userUpdate, setUserUpdate] = React.useState({ ...user, techStackUpdate: user.techStack.join(',') })
   const [selectedFile, setSelectedFile] = React.useState(null);
@@ -90,6 +91,48 @@ export default function ProfileUpdate() {
   }
 
   return (
+    <>
+    <Navbar bg="light" variant="light">
+        <Container>
+          <Navbar.Brand href="/" style={{}} >Dev Saathi</Navbar.Brand>
+          {/* <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          </Nav> */}
+        </Container>
+      </Navbar>
+    <div className="wrapper" style={{zIndex:"1"}}>
+                <input type="checkbox" id="btn" hidden />
+                <label htmlFor="btn" className="menu-btn">
+                <i className="fas fa-bars"></i>
+                <i className="fas fa-times"></i>
+                </label>
+                <nav id="sidebar">
+                    <div className="title">
+                    Menu
+                    </div>
+                    <ul className="list-items">
+                    <li><a href="/"><i className="fas fa-home"></i>Home</a></li>
+                    <li><a href="#" onClick={() => {navigate("/profile-update")}}><i className="fas fa-user"></i>Profile</a></li>
+                    <li><a href="/ProjectList"><i className="fas fa-sliders-h"></i>Projects</a></li>
+                    {/* <li><a href="#"><i className="fas fa-envelope"></i>Messages</a></li> */}
+                    {/* <li><a href="#"><i className="fas fa-cog"></i>Settings</a></li> */}
+                    <li><a href="#"><i className="fas fa-book"></i>Learn</a></li>
+                    {/* <li><a href="#"><i className="fas fa-phone"></i>Contact us</a></li> */}
+                    <li><a href="#" onClick={() => {localStorage.removeItem("user") 
+                        localStorage.removeItem("token")
+                        navigate("/login")}}>
+                        <i className="fas fa-sign-out-alt"></i>Log Out</a></li>
+                    <div className="icons">
+                        <a href="#"><i className="fab fa-facebook-f"></i></a>
+                        <a href="#"><i className="fab fa-twitter"></i></a>
+                        <a href="#"><i className="fab fa-github"></i></a>
+                        <a href="#"><i className="fab fa-youtube"></i></a>
+                    </div>
+                    </ul>
+                </nav>
+            </div>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -238,5 +281,6 @@ export default function ProfileUpdate() {
         </Box>
       </Container>
     </ThemeProvider>
+    </>
   );
 }
